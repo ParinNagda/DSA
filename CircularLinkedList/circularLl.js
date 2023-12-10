@@ -28,19 +28,38 @@ class CircularLinkedList {
     }
 
     addAtFirst(item) {
-        const node = new Node(item);
+         const node = new Node(item);
         let current;
         if(!this.head) {
             this.head = node;
         } else {
             current = this.head;
+            console.log(current)
             while(current.next && current.next != this.head) {
                 current = current.next
             }
             current.next = node;
-            this.head = current.next;
-               
+            node.next = this.head;
+           this.head = node;
         }
+        this.length++;
+    }
+    
+    addAtLast(item) {
+         const node = new Node(item);
+        let current;
+        if(!this.head) {
+            this.head = node;
+        } else {
+            current = this.head;
+            console.log(current)
+            while(current.next && current.next != this.head) {
+                current = current.next
+            }
+            current.next = node;
+            node.next = this.head;
+        }
+        this.length++;
     }
 
     list() {
@@ -65,8 +84,9 @@ class CircularLinkedList {
 let ll = new CircularLinkedList();
  
 ll.add(2);
-ll.add(5);
-ll.add(99);
+ll.addAtLast(5);
+ll.addAtFirst(99);
+ll.addAtFirst(25);
 ll.list();
  
  
