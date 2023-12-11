@@ -21,6 +21,22 @@ class DoubleLinkedList {
         }
         return string   
     }
+    
+    listReverse() {
+        let current = this.head;
+        var string = "";
+        while(current.next) {
+           current = current.next;
+        }
+        string = current.data + " "
+        while(current.prev) {
+            current = current.prev;
+            string += current.data + " "
+            console.log(current.data)
+        }
+        
+        return string
+    } 
 
     add(item) {
         const node = new Node(item);
@@ -66,21 +82,19 @@ class DoubleLinkedList {
         if (index && index <= this.length) {
             const node = new Node(item);
             let i = 0;
+            let prev;
             let current = this.head;
             while (i!= index-1) {
                 i++;
                 current = current.next;
             }
-            
-            node.prev = current;
-             node.next = current.next
-            current.next = node;
-           
-            console.log('current'); 
-            console.log(node); 
-            console.log('current'); 
-             
-            
+            prev = current
+            node.prev = prev
+            current = current.next
+            prev.next = node;
+            node.next = current
+            current.prev = node
+            this.length++;
         } else {
             return 'Index out of bounds'
         }    
@@ -95,10 +109,12 @@ ll.add(57);
 ll.addAtLast(5);
 ll.addAtIndex(18,3)
 ll.add(19);
-ll.addAtIndex(21,3)
-ll.addAtFirst(8);
-ll.addAtIndex(178,1)
+// ll.addAtIndex(21,3)
+// ll.addAtFirst(8);
+// ll.addAtIndex(178,1)
 console.log(ll.list());
+
+console.log(ll.listReverse());
 
 
 
