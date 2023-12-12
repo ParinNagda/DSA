@@ -22,6 +22,20 @@ class Stack {
        
     }
 
+    stackTop() {
+        if(this.isEmpty) {
+            return 'Stack is empty'
+        }
+        return this.array[this.top]
+    }
+
+    stackBottom() {
+        if(this.isEmpty) {
+            return 'Stack is empty'
+        }
+        return this.array[0]
+    }
+
     push (val) {
         
         if(this.isFull()) {
@@ -47,6 +61,30 @@ class Stack {
         }
         return this.array[index];
     }
+
+    checkParenthesis(expression){
+        for (let index = 0; index < expression.length; index++) {
+            const element = expression[index];
+            
+            if(element === "(") {
+               console.log('top ' + this.top)
+               this.push(element)
+            }
+            if(element === ")") {
+               if(this.isEmpty()) {
+                return 'Incorrect equation'
+               }
+               this.pop()
+            }
+        }
+        
+       if(this.top == -1){
+           return 'Balanced'
+       }
+       
+       return 'Unbalanced'
+        
+    }
     
     print() {
         console.log(this.array[0])
@@ -54,16 +92,8 @@ class Stack {
 }
 
 const s = new Stack(50);
-s.push(5);
-s.push(8)
-s.push(514)
-s.push(54)
-s.push(56)
-s.pop()
-s.push(45)
-s.push(96)
-s.push(736)
-console.log(s.peek(5))
+
+console.log(s.checkParenthesis("(a * b + c / d))("))
 
 
 
