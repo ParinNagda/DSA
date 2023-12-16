@@ -1,0 +1,79 @@
+class DeQueue {
+    constructor(size) {
+        this.size = size;
+        this.array = [];
+        this.backIndex = -1;
+        this.frontIndex = -1
+    }
+
+    enqueueRear(element) {
+        if(!this.isFull()) {
+            this.backIndex++;
+            this.array[this.backIndex] = element;
+            return element;
+        }
+        return false
+    }
+
+    enqueueFront(element) {
+        if(!this.isFull()) {
+            if(this.frontIndex >= 0) {
+                this.array[this.frontIndex] = element;
+                return element;
+            } 
+            return null;
+        }
+        return false
+    }
+
+    dequeueFront() {
+        if(this.isEmpty()) {
+            return 'Queue is empty';
+        }
+        this.frontIndex++;
+        let item = this.array[this.frontIndex];
+        delete this.array[this.frontIndex];
+        return item;
+    }
+    
+    dequeueRear() {
+        if(this.isEmpty()) {
+            return 'Queue is empty';
+        }
+        let item = this.array[this.backIndex];
+        delete this.array[this.backIndex];
+        this.backIndex--;
+        return item
+    }
+
+    isEmpty() {
+        if(this.frontIndex === this.backIndex) {
+            return true;
+        }
+        return false;
+    }
+
+    isFull() {
+        if (this.backIndex >= this.size - 1) {
+            return true
+        }
+        return false;
+    }
+
+    
+}
+
+const q = new DeQueue(10);
+
+q.enqueueRear(5)
+q.enqueueRear(6)
+q.enqueueRear(2)
+q.dequeueFront()
+q.enqueueFront(45)
+q.enqueueRear(65)
+q.enqueueRear(86)
+q.enqueueRear(62)
+q.dequeueRear()
+console.log(q)
+
+console.log(q.array)
